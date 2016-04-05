@@ -4,6 +4,8 @@
 
 using namespace std;
 
+enum sex {male, female};
+
 class Slav
 {
 private:
@@ -17,6 +19,13 @@ private:
 
 public:
 	Slav();
+
+	sex _sex()
+	{
+		if(_name[_name.length()-1]=='a')
+			return female;
+		else return male;
+	}
 
 	static int counter() { return _counter; }
 	

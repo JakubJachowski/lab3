@@ -24,11 +24,14 @@ void showMeAdapterSizes(queue <Slav *>, stack <Slav *>);
 
 void containers(Slav *, int);
 void adapters(Slav *, int);
+void ifduck(Slav *, int, char);
 
 
-int main(int argc, char const *argv[])
+
+int main(int argc, char const *argv[])//drugi argument z wiersza polecen to plec wyswietlanych osob z zadania na 5
 {
 	int n = 2 * atoi(argv[1]);
+	char x=argv[2][0];
 	Slav *slavs = new Slav[n];
 	cout << "# Generated Slavs" << endl;
 	for (int i = 0; i < n; ++i)
@@ -37,6 +40,7 @@ int main(int argc, char const *argv[])
 
 	containers(slavs, n);
 	adapters(slavs, n);
+	ifduck(slavs, n, x);
 
 	delete [] slavs;
 }
@@ -145,4 +149,37 @@ void showMeAdapterSizes(queue <Slav *> queue, stack <Slav *> stack)
 		stack.size(),
 		Slav::counter());
 
+}
+
+void ifduck(Slav * slavs, int n, char key)
+{
+	map<sex, vector<Slav *>> sexMap;
+	for(int i=0;i<n;i++)
+	{
+		if(slavs[i]._sex()==male)
+			sexMap[male].push_back(&slavs[i]);
+		else
+			sexMap[female].push_back(&slavs[i]);
+	};
+
+	
+	if(key=='m')
+	{
+		vector<Slav *>::iterator maleIterator=sexMap[male].begin();
+		while(maleIterator!=sexMap[male].end())
+		{
+			cout<<(*maleIterator)->description()<<endl;
+			maleIterator++;
+		}
+	}
+	else
+		if(key=='f')
+		{
+			vector<Slav *>::iterator femaleIterator=sexMap[female].begin();
+			while(femaleIterator!=sexMap[female].end())
+			{
+				cout<<(*femaleIterator)->description()<<endl;
+				femaleIterator++;
+			}
+		}
 }

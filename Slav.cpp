@@ -22,7 +22,7 @@ void Slav::init()
 
 Slav::Slav()
 {
-	static int amountOfNames = (init(), names.size());
+	static int amountOfNames = (init(), names.size());//dzieje się tu leniwa inicjalizacja
 	_name = names[rand() % amountOfNames];
 	_id = _counter++;
 }
